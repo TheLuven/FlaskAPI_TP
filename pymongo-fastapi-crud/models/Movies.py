@@ -1,6 +1,8 @@
 import uuid
+from datetime import datetime
 from typing import Optional, List
 
+from bson import ObjectId
 from pydantic import BaseModel, Field
 
 from models.Award import Award
@@ -9,37 +11,45 @@ from models.tomatoes import Tomatoes
 
 
 class Movie(BaseModel):
-    id: str = Field(default_factory=uuid.uuid4, alias="_id")
-    plot: str = Field(...)
-    genres: [str] = Field(...)
+    id: ObjectId = Field(default_factory=ObjectId, alias="_id")
+    plot: Optional[str] = None
+    genres: List[str] = Field(...)
     runtime: int = Field(...)
+    cast : Optional[List[str]] = None
+    poster : Optional[str] = None
     title: str = Field(...)
-    fullplot: str = Field(...)
-    languages: [str] = Field(...)
-    released: str = Field(...)
-    directors: [str] = Field(...)
-    rated = str = Field(...)
+    fullplot: Optional[str] = None
+    languages: Optional[List[str]] = None
+    released: Optional[datetime] = None
+    directors: List[str] = Field(...)
+    rated: Optional[str] = None
     awards: Award = Field(...)
     lastupdated: str = Field(...)
     year: int = Field(...)
     imdb: Imdb = Field(...)
-    countries: [str] = Field(...)
+    countries: List[str] = Field(...)
     type: str = Field(...)
-    tomatoes: Tomatoes = Field(...)
+    tomatoes: Optional[Tomatoes] = None
     num_mflix_comments: int = Field(...)
 
     class Config:
-        populate_by_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {
+            ObjectId: str,
+            datetime: lambda v: v.isoformat(),
+        }
         json_schema_extra = {
             "example": {
                 "_id": "066de609-b04a-4b30-b46c-32537c7f1f6e",
                 "plot": "In a galaxy far far away",
                 "genres": ["Sci-Fi", "Action"],
                 "runtime": 120,
+                "cast" : ["Mark Hamil","Harison Ford"],
+                "poster" :"http://...",
                 "title": "Star Wars",
                 "fullplot": "The Empire is building a Death Star",
                 "languages": ["English"],
-                "released": "1977",
+                "released": "1977-03-23T00:00:00.000+00:00",
                 "directors": ["George Lucas"],
                 "rated": "PG",
                 "awards": {
@@ -79,10 +89,12 @@ class MovieUpdate(BaseModel):
     plot : Optional[str]
     genres : Optional[List[str]]
     runtime : Optional[int]
+    cast : Optional[List[str]]
+    poster: Optional[str]
     title : Optional[str]
     fullplot : Optional[str]
     languages : Optional[List[str]]
-    released : Optional[str]
+    released : Optional[datetime]
     directors : Optional[List[str]]
     rated : Optional[str]
     awards : Optional[Award]
@@ -100,6 +112,8 @@ class MovieUpdate(BaseModel):
                 "plot": "In a galaxy far far away",
                 "genres": ["Sci-Fi", "Action"],
                 "runtime": 120,
+                "cast": ["Mark Hamil", "Harison Ford"],
+                "poster": "http://...",
                 "title": "Star Wars",
                 "fullplot": "The Empire is building a Death Star",
                 "languages": ["English"],

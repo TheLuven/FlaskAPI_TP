@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 class Review(BaseModel):
     rating: float = Field(...)
     numReviews: int = Field(...)
-    meter: int = Field(...)
+    meter: Optional[int] = None
 
     class Config:
         populate_by_name = True
