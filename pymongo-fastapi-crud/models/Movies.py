@@ -6,12 +6,13 @@ from bson import ObjectId
 from pydantic import BaseModel, Field
 
 from models.Award import Award
+from models.PydanticObjectId import PydanticObjectId
 from models.imdb import Imdb
 from models.tomatoes import Tomatoes
 
 
 class Movie(BaseModel):
-    id: ObjectId = Field(default_factory=ObjectId, alias="_id")
+    #id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
     plot: Optional[str] = None
     genres: List[str] = Field(...)
     runtime: int = Field(...)
@@ -86,27 +87,28 @@ class Movie(BaseModel):
         }
 
 class MovieUpdate(BaseModel):
-    plot : Optional[str]
-    genres : Optional[List[str]]
-    runtime : Optional[int]
-    cast : Optional[List[str]]
-    poster: Optional[str]
-    title : Optional[str]
-    fullplot : Optional[str]
-    languages : Optional[List[str]]
-    released : Optional[datetime]
-    directors : Optional[List[str]]
-    rated : Optional[str]
-    awards : Optional[Award]
-    lastupdated : Optional[str]
-    year : Optional[int]
-    imdb : Optional[Imdb]
-    countries : Optional[List[str]]
-    type : Optional[str]
-    tomatoes : Optional[Tomatoes]
-    num_mflix_comments : Optional[int]
+    plot : Optional[str] = None
+    genres : Optional[List[str]] = None
+    runtime : Optional[int] = None
+    cast : Optional[List[str]] = None
+    poster: Optional[str] = None
+    title : Optional[str] = None
+    fullplot : Optional[str] = None
+    languages : Optional[List[str]] = None
+    released : Optional[datetime] = None
+    directors : Optional[List[str]] = None
+    rated : Optional[str] = None
+    awards : Optional[Award] = None
+    lastupdated : Optional[str] = None
+    year : Optional[int] = None
+    imdb : Optional[Imdb] = None
+    countries : Optional[List[str]] = None
+    type : Optional[str] = None
+    tomatoes : Optional[Tomatoes] = None
+    num_mflix_comments : Optional[int] = None
 
     class Config:
+        arbitrary_types_allowed = True
         json_schema_extra = {
             "example": {
                 "plot": "In a galaxy far far away",

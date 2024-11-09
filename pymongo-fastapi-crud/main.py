@@ -15,7 +15,10 @@ app = FastAPI()
 @app.on_event("startup")
 def startup_db_client():
     print("Connecting to MongoDB...")
-    app.mongodb_client = MongoClient(config["ATLAS_URI"], server_api=ServerApi('1'))
+    app.mongodb_client = MongoClient(
+        config["ATLAS_URI"],
+        server_api=ServerApi('1')
+    )
     try:
         app.mongodb_client.admin.command('ping')
         print("Pinged your deployment. You successfully connected to MongoDB!")
