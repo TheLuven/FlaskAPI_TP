@@ -1,0 +1,5 @@
+fastapi==0.112.2
+uvicorn==0.20.0
+pymongo==4.8.0
+neo4j==5.26.0
+python-dotenv==0.21.0

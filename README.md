@@ -8,6 +8,8 @@
 - uvicorn 0.20.0
 - fastapi 0.112.2
 - pymongo 4.8.0
+- neo4j 5.26.0
+
 
 ## Installation
 
@@ -15,25 +17,42 @@
 ```
 https://github.com/TheLuven/FlaskAPI_TP.git
 ```
-2. Mettre le repertoire root (pour Pycharm)
+2. Installer les dépendances
+```
+cd ./FlaskAPI_TP
+pip install -r requirements.txt
+```
+
+3. Mettre le repertoire root (pour Pycharm)
 
 Click droit sur le repertoire `pymongo-fastapi-crud` -> Mark Directory as -> Sources Root
 
-3. Mettre sa base de données Mongo
+4. Mettre sa base de données Mongo
 
 Aller dans le fichier .env (path: `pymongo-fastapi-crud/.env`) 
 
 Changer la valeur de `ATLAS_URI` par votre propre URI de connexion à votre base de données Mongo 
 (Sur altas, cliquer sur cluster. Puis cliquer sur `connect` -> `Driver` et choisir `Python`)
 
-4. Lancer le serveur
+5. Mettre sa base de données Neo4j
+
+Aller sur `https://sandbox.neo4j.com/` et connectez vous à votre compte
+Si vous n'avez aucun projet, selectionnez `Movies` et cliquez sur `Create Project`
+Une fois le projet créé, cliquez sur le triangle à côté de `Open` (le plus à droite)
+Aller dans l'onglet `Connection Details` et
+ - copier le lien `Bolt URL` et le coller dans le fichier .env à la place de `NEO4J_URI`
+ - copier le `Username` et le coller dans le fichier .env à la place de `NEO4J_USER`
+ - copier le `Password` et le coller dans le fichier .env à la place de `NEO4J_PASSWORD`
+
+
+6. Lancer le serveur
 
 ```
 cd ./pymongo-fastapi-crud
 uvicorn main:app --reload
 ```
 
-5. Aller sur openApi
+7. Aller sur openApi
 ```
 http://127.0.0.1:8000/docs#
 ```
