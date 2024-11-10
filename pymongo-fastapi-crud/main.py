@@ -6,8 +6,7 @@ from pymongo.server_api import ServerApi
 
 from neo4j import GraphDatabase
 
-from routes.booksRoutes import router as book_router
-from routes.artistsRoutes import router as artist_router
+from routes.usersRoutes import router as user_router
 from routes.moviesRoutes import router as movie_router
 
 config = dotenv_values(".env")
@@ -19,11 +18,9 @@ app = FastAPI()
 @app.on_event("startup")
 def startup_db_client():
     print("Connecting to MongoDB...")
-    app.mongodb_client = MongoClient(
-        config["ATLAS_URI"],
-        server_api=ServerApi('1')
-    )
+
     try:
+        app.mongodb_client = MongoClient(config["ATLAS_URI"],server_api=ServerApi('1'))
         app.mongodb_client.admin.command('ping')
         print("Pinged your deployment. You successfully connected to MongoDB!")
         app.database = app.mongodb_client[config["DB_NAME"]]
@@ -54,5 +51,4 @@ def shutdown_db_client():
 
 
 app.include_router(movie_router, tags=["movies"], prefix="/movies")
-app.include_router(book_router, tags=["books"], prefix="/books")
-app.include_router(artist_router, tags=["artists"], prefix="/artists")
+app.include_router(user_router, tags=["users"], prefix="/users")

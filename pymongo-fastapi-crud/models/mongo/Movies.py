@@ -1,21 +1,19 @@
-import uuid
 from datetime import datetime
 from typing import Optional, List
 
 from bson import ObjectId
 from pydantic import BaseModel, Field
 
-from models.Award import Award
-from models.PydanticObjectId import PydanticObjectId
-from models.imdb import Imdb
-from models.tomatoes import Tomatoes
+from models.mongo.Award import Award
+from models.mongo.imdb import Imdb
+from models.mongo.tomatoes import Tomatoes
 
 
 class Movie(BaseModel):
     #id: PydanticObjectId = Field(default_factory=PydanticObjectId, alias="_id")
     plot: Optional[str] = None
     genres: List[str] = Field(...)
-    runtime: int = Field(...)
+    runtime: Optional[int] = None
     cast : Optional[List[str]] = None
     poster : Optional[str] = None
     title: str = Field(...)

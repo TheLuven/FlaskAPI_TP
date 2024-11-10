@@ -49,8 +49,9 @@ Aller dans l'onglet `Connection Details` et
 
 ```
 cd ./pymongo-fastapi-crud
-uvicorn main:app --reload
+python uvicorn main:app --reload
 ```
+>Note : Le démarrage peut prendre plusieurs secondes, des messages sont mis dans le terminal pour savoir où en est le démarrage des différentes base de données
 
 7. Aller sur openApi
 ```
@@ -65,8 +66,8 @@ Solution :
 Aller sur atlas, dans la partie `Network Access` et cliquer sur `+Add IP ADDRESS`
 Puis cliquer sur `ADD CURRENT IP ADDRESS` et `CONFIRM`
 
-2. OpenApi ne s'affiche pas
-Si le lancement du serveur, c'est bien passé mais que la page charge dans le vide :
+2. OpenApi ne s'affiche pas après avoir modifié le code sans erreur
+Si le lancement du serveur c'est bien passé mais que la page charge dans le vide :
  - essayer de fermer le navigateur et de le relancer
  - essayer de fermer pycharm et de le relancer
  - et si ça ne marche toujours pas, essayer de redémarrer l'ordinateur

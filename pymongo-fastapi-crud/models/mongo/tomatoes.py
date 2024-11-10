@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import Field, BaseModel
 
-from models.review import Review
+from models.mongo.review import Review
 
 
 class Tomatoes(BaseModel):
