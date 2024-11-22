@@ -2,17 +2,6 @@
 
 ## Installation
 
-## Prérequis
-
-- Python 3.12 or later
-- uvicorn 0.20.0
-- fastapi 0.112.2
-- pymongo 4.8.0
-- neo4j 5.26.0
-
-
-## Installation
-
 1. Clone le repertoire
 ```
 https://github.com/TheLuven/FlaskAPI_TP.git
